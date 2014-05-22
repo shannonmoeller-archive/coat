@@ -1,0 +1,5 @@
+name: mog
+ui: jasmine
+browsers:
+- name: chrome
+  version: latest
