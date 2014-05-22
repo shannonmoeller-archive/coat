@@ -10,8 +10,8 @@ describe('Collection', function () {
             b = new Collection(obj),
             c = collection(b);
 
-        expect(a.list).toBe(obj); // functional
-        expect(b.list).toBe(obj); // classical
-        expect(c.list).toBe(obj); // re-wrap
+        expect(a.arr).toBe(obj); // functional
+        expect(b.arr).toBe(obj); // classical
+        expect(c.arr).toBe(obj); // re-wrap
     });
 });

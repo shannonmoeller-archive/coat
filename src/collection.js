@@ -3,20 +3,20 @@
 /**
  * @class Collection
  */
-function Collection(list) {
+function Collection(arr) {
     if (!(this instanceof Collection)) {
-        return new Collection(list);
+        return new Collection(arr);
     }
 
-    if (list instanceof Collection) {
-        list = list.list;
+    if (arr instanceof Collection) {
+        arr = arr.arr;
     }
 
     /**
-     * @property list
+     * @property arr
      * @type {Array|Object}
      */
-    this.list = list;
+    this.arr = arr;
 }
 
 module.exports = Collection;
