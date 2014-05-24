@@ -13,7 +13,7 @@
     "url": "https://github.com/shannonmoeller/coat.git"
   },
   "scripts": {
-    "coveralls": "gulp cover && cat ./coverage/lcov.info | coveralls",
+    "coveralls": "gulp test && cat ./coverage/lcov.info | coveralls",
     "test": "gulp test"
   },
   "dependencies": {
@@ -22,15 +22,16 @@
   "devDependencies": {
     "coveralls": "^2.6.1",
     "gulp": "^3.6.0",
-    "gulp-istanbul": "^0.1.1",
+    "gulp-istanbul": "^0.2.0",
     "gulp-jasmine": "^0.2.0",
     "gulp-jscs": "^0.4.1",
     "gulp-jshint": "^1.5.1",
+    "gulp-livereload": "^1.5.0",
+    "gulp-shell": "^0.2.5",
     "gulp-watch": "^0.5.3",
     "jshint-stylish": "^0.1.5",
-    "gulp-livereload": "^1.5.0",
-    "map-stream": "^0.1.0",
-    "jsdom": "^0.10.5"
+    "phantomjs": "^1.9.7-7",
+    "zuul": "^1.6.5"
   },
   "engines": {
     "node": ">= 0.10"

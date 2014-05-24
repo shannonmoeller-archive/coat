@@ -1,29 +1,34 @@
 'use strict';
 
 var proto,
-    Emitter = require('./emitter'),
-    inherits = require('mout/lang/inheritPrototype');
+	Emitter = require('./emitter'),
+	inherits = require('mout/lang/inheritPrototype');
 
 /**
+ * A simple object mutator.
+ *
  * @class Model
+ * @extends Emitter
  *
  * @constructor
  * @param {Object} obj
  */
 function Model(obj) {
-    if (!(this instanceof Model)) {
-        return new Model(obj);
-    }
+	if (!(this instanceof Model)) {
+		return new Model(obj);
+	}
 
-    if (obj instanceof Model) {
-        obj = obj.obj;
-    }
+	if (obj instanceof Model) {
+		obj = obj.obj;
+	}
 
-    /**
-     * @property obj
-     * @type {Object}
-     */
-    this.obj = obj;
+	/**
+	 * @property obj
+	 * @type {Object}
+	 */
+	this.obj = obj;
+
+	Emitter.call(this);
 }
 
 proto = inherits(Model, Emitter);
@@ -34,7 +39,7 @@ proto = inherits(Model, Emitter);
  * @return {Any}
  */
 proto.get = function (name) {
-    return this.obj[name];
+	return this.obj[name];
 };
 
 /**
@@ -44,19 +49,23 @@ proto.get = function (name) {
  * @chainable
  */
 proto.set = function (name, value) {
-    var obj = this.obj;
-    var old = obj[name];
+	var obj = this.obj,
+		old = obj[name];
 
-    obj[name] = value;
+	if (value === old) {
+		return this;
+	}
 
-    this.emit('change', [{
-        type: 'updated',
-        object: obj,
-        name: name,
-        oldValue: old
-    }]);
+	obj[name] = value;
 
-    return this;
+	this.emit('change', [{
+		type: 'updated',
+		object: obj,
+		name: name,
+		oldValue: old
+	}]);
+
+	return this;
 };
 
 module.exports = Model;

@@ -18,7 +18,7 @@
     "funcscope": false,
     "globalstrict": false,
     "immed": true,
-    "indent": 4,
+    "indent": false,
     "iterator": false,
     "jquery": false,
     "lastsemic": false,

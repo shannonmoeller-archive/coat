@@ -1,27 +1,25 @@
 'use strict';
 
 var proto,
-
-    /**
-     * Native array slice method for use with arguments.
-     *
-     * @type {Function}
-     */
-    slice = Array.prototype.slice;
+	slice = Array.prototype.slice;
 
 /**
  * A simple event emitter.
- * https://github.com/component/emitter
  *
  * @class Emitter
+ *
  * @constructor
  */
 function Emitter() {
-    /**
-     * @property callbacks
-     * @type {Object.<Array.<Function>>}
-     */
-    this.callbacks = {};
+	if (!(this instanceof Emitter)) {
+		return new Emitter();
+	}
+
+	/**
+	 * @property callbacks
+	 * @type {Object.<Array.<Function>>}
+	 */
+	this.callbacks = {};
 }
 
 proto = Emitter.prototype;
@@ -33,8 +31,8 @@ proto = Emitter.prototype;
  * @param {String} event
  * @return {Array}
  */
-proto.getListeners = function(event) {
-    return this.callbacks[event] || (this.callbacks[event] = []);
+proto.getListeners = function (event) {
+	return this.callbacks[event] || (this.callbacks[event] = []);
 };
 
 /**
@@ -44,8 +42,8 @@ proto.getListeners = function(event) {
  * @param {String} event
  * @return {Boolean}
  */
-proto.hasListeners = function(event) {
-    return !!this.getListeners(event).length;
+proto.hasListeners = function (event) {
+	return !!this.getListeners(event).length;
 };
 
 /**
@@ -56,10 +54,10 @@ proto.hasListeners = function(event) {
  * @param {Function} fn
  * @chainable
  */
-proto.on = function(event, fn) {
-    this.getListeners(event).push(fn);
+proto.on = function (event, fn) {
+	this.getListeners(event).push(fn);
 
-    return this;
+	return this;
 };
 
 /**
@@ -71,18 +69,19 @@ proto.on = function(event, fn) {
  * @param {Function} fn
  * @chainable
  */
-proto.one = function(event, fn) {
-    var self = this;
+proto.one = function (event, fn) {
+	var that = this;
 
-    function on() {
-        self.off(event, on);
-        fn.apply(this, arguments); //jshint ignore: line
-    }
+	function on() {
+		that.off(event, on);
+		fn.apply(this, arguments); //jshint ignore: line
+	}
 
-    on.fn = fn;
-    this.on(event, on);
+	on.fn = fn;
 
-    return this;
+	this.on(event, on);
+
+	return this;
 };
 
 /**
@@ -94,39 +93,41 @@ proto.one = function(event, fn) {
  * @param {Function} fn
  * @chainable
  */
-proto.off = function(event, fn) {
-    var callbacks;
-    var length;
-    var cb;
-    var i;
+proto.off = function (event, fn) {
+	var callbacks, length, cb, i;
 
-    switch (arguments.length) {
-        case 0:
-            // all
-            this.callbacks = {};
-            return this;
+	switch (arguments.length) {
+		case 0: {
+			// all
+			this.callbacks = {};
 
-        case 1:
-            // specific type
-            delete this.callbacks[event];
-            return this;
+			return this;
+		}
 
-        default:
-            // specific method
-            callbacks = this.getListeners(event);
-            length = callbacks.length;
+		case 1: {
+			// specific type
+			delete this.callbacks[event];
 
-            for (i = 0; i < length; i++) {
-                cb = callbacks[i];
+			return this;
+		}
 
-                if (cb === fn || cb.fn === fn) {
-                    callbacks.splice(i, 1);
-                    break;
-                }
-            }
+		default: {
+			// specific method
+			callbacks = this.getListeners(event);
+			length = callbacks.length;
 
-            return this;
-    }
+			for (i = 0; i < length; i++) {
+				cb = callbacks[i];
+
+				if (cb === fn || cb.fn === fn) {
+					callbacks.splice(i, 1);
+					break;
+				}
+			}
+
+			return this;
+		}
+	}
 };
 
 /**
@@ -137,17 +138,17 @@ proto.off = function(event, fn) {
  * @param {Mixed} ...
  * @chainable
  */
-proto.emit = function(event) {
-    var args = slice.call(arguments, 1);
-    var callbacks = this.getListeners(event).slice(0);
-    var length = callbacks.length;
-    var i = 0;
+proto.emit = function (event) {
+	var args = slice.call(arguments, 1),
+		callbacks = this.getListeners(event).slice(0),
+		length = callbacks.length,
+		i = 0;
 
-    for (; i < length; i++) {
-        callbacks[i].apply(this, args);
-    }
+	for (; i < length; i++) {
+		callbacks[i].apply(this, args);
+	}
 
-    return this;
+	return this;
 };
 
 /**
@@ -159,10 +160,10 @@ proto.emit = function(event) {
  * @param {Emitter} emitter
  * @chainable
  */
-proto.proxy = function(event, emitter) {
-    emitter.on(event, this.emit.bind(this, event));
+proto.proxy = function (event, emitter) {
+	emitter.on(event, this.emit.bind(this, event));
 
-    return this;
+	return this;
 };
 
-return Emitter;
+module.exports = Emitter;
