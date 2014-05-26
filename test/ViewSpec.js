@@ -4,14 +4,8 @@ var View = require('../src/view'),
 	view = View;
 
 describe('View', function () {
-	var div;
-
-	beforeEach(function () {
-		div = view(document.createElement('div'));
-	});
-
 	it('should wrap an object', function () {
-		var el = div.el,
+		var el = {},
 			a = view(el),
 			b = new View(el),
 			c = view(b);
@@ -23,22 +17,17 @@ describe('View', function () {
 
 	describe('prototype', function () {
 		describe('append', function () {
-			it('should', function () {
+			it('should append a child', function () {
 			});
 		});
 
 		describe('appendTo', function () {
-			it('should', function () {
+			it('should append as a child', function () {
 			});
 		});
 
 		describe('find', function () {
 			it('should find child elements', function () {
-				div
-					.append('<a href="http://google.com">Google</a>')
-					.appendTo(document.body);
-
-				console.log('bye');
 			});
 		});
 	});

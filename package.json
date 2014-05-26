@@ -1,7 +1,7 @@
 {
   "name": "coat",
   "version": "0.1.0",
-  "description": "The stupid object wrappers.",
+  "description": "The stupid object mutators.",
   "keywords": [],
   "homepage": "https://github.com/shannonmoeller/coat",
   "bugs": "https://github.com/shannonmoeller/coat/issues",
@@ -27,11 +27,8 @@
     "gulp-jscs": "^0.4.1",
     "gulp-jshint": "^1.5.1",
     "gulp-livereload": "^1.5.0",
-    "gulp-shell": "^0.2.5",
     "gulp-watch": "^0.5.3",
-    "jshint-stylish": "^0.1.5",
-    "phantomjs": "^1.9.7-7",
-    "zuul": "^1.6.5"
+    "jshint-stylish": "^0.1.5"
   },
   "engines": {
     "node": ">= 0.10"

@@ -36,17 +36,6 @@ proto.getListeners = function (event) {
 };
 
 /**
- * Check if this emitter has any `event` callbacks.
- *
- * @method hasListeners
- * @param {String} event
- * @return {Boolean}
- */
-proto.hasListeners = function (event) {
-	return !!this.getListeners(event).length;
-};
-
-/**
  * Listen on the given `event` with `fn`.
  *
  * @method on

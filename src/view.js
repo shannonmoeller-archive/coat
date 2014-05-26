@@ -5,7 +5,7 @@ var proto,
 	inherits = require('mout/lang/inheritPrototype');
 
 /**
- * A simple element mutator.
+ * A simple observable element mutator.
  *
  * @class View
  * @extends Emitter

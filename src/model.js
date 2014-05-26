@@ -5,7 +5,7 @@ var proto,
 	inherits = require('mout/lang/inheritPrototype');
 
 /**
- * A simple object mutator.
+ * A simple observable object mutator.
  *
  * @class Model
  * @extends Emitter
@@ -49,18 +49,25 @@ proto.get = function (name) {
  * @chainable
  */
 proto.set = function (name, value) {
-	var obj = this.obj,
+	var type,
+		obj = this.obj,
 		old = obj[name];
 
+	// Nothing to do
 	if (value === old) {
 		return this;
 	}
 
+	// Determine change type
+	type = name in obj ? 'update' : 'add';
+
+	// Update value
 	obj[name] = value;
 
+	// Notify
 	this.emit('change', [{
-		type: 'updated',
 		object: obj,
+		type: type,
 		name: name,
 		oldValue: old
 	}]);

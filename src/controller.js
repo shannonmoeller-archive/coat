@@ -5,7 +5,7 @@ var proto,
 	inherits = require('mout/lang/inheritPrototype');
 
 /**
- * A simple controller base class.
+ * A simple observable controller class.
  *
  * @class Controller
  * @extends Emitter
