@@ -1,7 +1,7 @@
 {
   "name": "coat",
-  "version": "0.1.0",
-  "description": "The stupid object mutators.",
+  "version": "0.0.1-alpha1",
+  "description": "The stupid observable mutator framework.",
   "keywords": [],
   "homepage": "https://github.com/shannonmoeller/coat",
   "bugs": "https://github.com/shannonmoeller/coat/issues",
