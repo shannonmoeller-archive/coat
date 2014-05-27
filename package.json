@@ -21,12 +21,14 @@
   },
   "devDependencies": {
     "coveralls": "^2.6.1",
+    "expect.js": "^0.3.1",
+    "gimmie": "^0.1.2",
     "gulp": "^3.6.0",
     "gulp-istanbul": "^0.2.0",
-    "gulp-jasmine": "^0.2.0",
     "gulp-jscs": "^0.4.1",
     "gulp-jshint": "^1.5.1",
     "gulp-livereload": "^1.5.0",
+    "gulp-mocha": "^0.4.1",
     "gulp-watch": "^0.5.3",
     "jshint-stylish": "^0.1.5"
   },

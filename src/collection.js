@@ -26,7 +26,7 @@ function Collection(arr) {
 	 * @property arr
 	 * @type {Array}
 	 */
-	this.arr = arr;
+	this.arr = arr || [];
 
 	Emitter.call(this);
 }
@@ -36,15 +36,10 @@ proto = inherits(Collection, Emitter);
 /**
  * @method add
  * @param {Any} item
- * @param {Number?} at
  * @chainable
  */
-proto.add = function(item, at) {
-	if (at === null) {
-		at = this.arr.length;
-	}
-
-	return this.splice(at, 0, item);
+proto.add = function(item) {
+	return this.splice(this.arr.length, 0, item);
 };
 
 /**
@@ -57,15 +52,17 @@ proto.empty = function () {
 
 /**
  * @method remove
- * @param {Number?} at
+ * @param {Any} item
  * @chainable
  */
-proto.remove = function (at) {
-	if (at === null) {
-		at = this.arr.length - 1;
+proto.remove = function (item) {
+	var index = this.arr.indexOf(item);
+
+	if (index < 0) {
+		return this;
 	}
 
-	return this.splice(at, 1);
+	return this.splice(index, 1);
 };
 
 /**
@@ -75,7 +72,7 @@ proto.remove = function (at) {
  * @return {Array}
  */
 proto.slice = function (begin, end) {
-	if (begin === null) {
+	if (begin == null) {
 		begin = 0;
 	}
 
@@ -101,8 +98,8 @@ proto.splice = function (index /*, count, items... */) {
 		return this;
 	}
 
-	// Create change records
-	for (i = 0, len = changed.length; i < length; i++) {
+	// Create delete records
+	for (i = 0, len = changed.length; i < len; i++) {
 		changeset.push({
 			object: arr,
 			type: 'delete',
@@ -112,7 +109,7 @@ proto.splice = function (index /*, count, items... */) {
 	}
 
 	// Create add records
-	for (i = 2, len = arguments.length; i < length; i++) {
+	for (i = 2, len = arguments.length; i < len; i++) {
 		changeset.push({
 			object: arr,
 			type: 'add',

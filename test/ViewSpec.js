@@ -1,6 +1,7 @@
 'use strict';
 
 var View = require('../src/view'),
+	expect = require('expect.js'),
 	view = View;
 
 describe('View', function () {
@@ -10,9 +11,9 @@ describe('View', function () {
 			b = new View(el),
 			c = view(b);
 
-		expect(a.el).toBe(el); // functional
-		expect(b.el).toBe(el); // classical
-		expect(c.el).toBe(el); // re-wrap
+		expect(a.el).to.be(el); // functional
+		expect(b.el).to.be(el); // classical
+		expect(c.el).to.be(el); // re-wrap
 	});
 
 	describe('prototype', function () {

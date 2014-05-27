@@ -30,11 +30,11 @@ gulp.task('cover', function () {
 
 gulp.task('test', ['cover'], function () {
     var istanbul = require('gulp-istanbul');
-    var jasmine = require('gulp-jasmine');
+    var mocha = require('gulp-mocha');
 
     return gulp
         .src(paths.test)
-        .pipe(jasmine({ verbose: true }))
+        .pipe(mocha({ reporter: 'spec', ui: 'bdd' }))
         .pipe(istanbul.writeReports());
 });
 

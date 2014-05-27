@@ -1,11 +1,12 @@
 'use strict';
 
-var Container = require('../src/container');
+var Container = require('../src/container'),
+	expect = require('expect.js');
 
 describe('Container', function () {
 	it('should', function () {
 		var a = new Container();
-		expect(a).toBeDefined();
+		expect(a).not.to.be(undefined);
 	});
 
 	describe('prototype', function () {

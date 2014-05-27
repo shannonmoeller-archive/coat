@@ -1,6 +1,7 @@
 'use strict';
 
 var proto,
+	bind = require('mout/function/bind'),
 	slice = Array.prototype.slice;
 
 /**
@@ -74,8 +75,8 @@ proto.one = function (event, fn) {
 };
 
 /**
- * Remove the given callback for `event` or all
- * registered callbacks.
+ * Remove a specific callback, all callbacks for a given `event`,
+ * or all callbacks entirely.
  *
  * @method off
  * @param {String} event
@@ -141,8 +142,8 @@ proto.emit = function (event) {
 };
 
 /**
- * When an event is emitted on one emitter, trigger the same event
- * on this emitter.
+ * When an event is emitted on this emitter, emit the same event on another
+ * emitter.
  *
  * @method proxy
  * @param {String} event
@@ -150,7 +151,16 @@ proto.emit = function (event) {
  * @chainable
  */
 proto.proxy = function (event, emitter) {
-	emitter.on(event, this.emit.bind(this, event));
+	if (emitter === this) {
+		throw new Error('Emitter may not proxy to itself.');
+	}
+
+	var fn = emitter.emit,
+		on = bind(fn, emitter, event);
+
+	on.fn = fn;
+
+	this.on(event, on);
 
 	return this;
 };

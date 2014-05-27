@@ -26,7 +26,7 @@ function Model(obj) {
 	 * @property obj
 	 * @type {Object}
 	 */
-	this.obj = obj;
+	this.obj = obj || {};
 
 	Emitter.call(this);
 }
