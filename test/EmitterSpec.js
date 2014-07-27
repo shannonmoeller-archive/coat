@@ -21,7 +21,7 @@ describe('Emitter', function () {
 				var a = emitter();
 
 				a.callbacks = {
-					'foo': [function () {}]
+					foo: [function () {}]
 				};
 
 				expect(a.getListeners('foo').length).to.be(1);

@@ -35,7 +35,7 @@ proto = inherits(Container, Emitter);
  * @method get
  * @param {String} name
  * @param {Object} options
- * @return {Any}
+ * @return {*}
  */
 proto.get = function (name, options) {
 	var Module = this.registry[name];
@@ -59,8 +59,8 @@ proto.get = function (name, options) {
  *
  * @method set
  * @param {String} name
- * @param {Any} module
- * @return {Any}
+ * @param {*} module
+ * @return {*}
  */
 proto.set = function (name, module) {
 	if (arguments.length === 1) {

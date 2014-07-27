@@ -35,10 +35,10 @@ proto = inherits(Collection, Emitter);
 
 /**
  * @method add
- * @param {Any} item
+ * @param {*} item
  * @chainable
  */
-proto.add = function(item) {
+proto.add = function (item) {
 	return this.splice(this.arr.length, 0, item);
 };
 
@@ -52,7 +52,7 @@ proto.empty = function () {
 
 /**
  * @method remove
- * @param {Any} item
+ * @param {*} item
  * @chainable
  */
 proto.remove = function (item) {
@@ -67,8 +67,8 @@ proto.remove = function (item) {
 
 /**
  * @method slice
- * @param {Number?} begin
- * @param {Number?} end
+ * @param {Number=} begin
+ * @param {Number=} end
  * @return {Array}
  */
 proto.slice = function (begin, end) {
@@ -82,21 +82,16 @@ proto.slice = function (begin, end) {
 /**
  * @method splice
  * @param {Number} index
- * @param {Number} count
- * @param {...Any} items
+ * @param {Number=} count
+ * @param {...*} items
  * @chainable
  */
-proto.splice = function (index /*, count, items... */) {
+proto.splice = function (index) {
 	var len, i,
 		arr = this.arr,
 		old = arr.length,
 		changed = arr.splice.apply(this.arr, arguments),
 		changeset = [];
-
-	// Nothing to do
-	if (arguments.length === 0 || changed.length === 0) {
-		return this;
-	}
 
 	// Create delete records
 	for (i = 0, len = changed.length; i < len; i++) {

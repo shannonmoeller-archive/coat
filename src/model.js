@@ -35,8 +35,8 @@ proto = inherits(Model, Emitter);
 
 /**
  * @method get
- * @param {Any} name
- * @return {Any}
+ * @param {*} name
+ * @return {*}
  */
 proto.get = function (name) {
 	return this.obj[name];
@@ -44,8 +44,8 @@ proto.get = function (name) {
 
 /**
  * @method set
- * @param {Any} name
- * @param {Any} value
+ * @param {*} name
+ * @param {*} value
  * @chainable
  */
 proto.set = function (name, value) {

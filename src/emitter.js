@@ -1,8 +1,27 @@
 'use strict';
 
-var proto,
-	bind = require('mout/function/bind'),
-	slice = Array.prototype.slice;
+var bind = require('mout/function/bind'),
+	slice = Array.prototype.slice,
+	proto,
+
+	/**
+	 * @type {Function}
+	 * @param {String} event
+	 * @param {Emitter} from
+	 * @param {Emitter} to
+	 */
+	proxy = function (event, from, to) {
+		if (from === to) {
+			throw new Error('Emitter may not proxy to itself.');
+		}
+
+		var fn = to.emit,
+			on = bind(fn, to, event);
+
+		on.fn = fn;
+
+		from.on(event, on);
+	};
 
 /**
  * A simple event emitter.
@@ -64,7 +83,7 @@ proto.one = function (event, fn) {
 
 	function on() {
 		that.off(event, on);
-		fn.apply(this, arguments); //jshint ignore: line
+		fn.apply(this, arguments); // jshint ignore: line
 	}
 
 	on.fn = fn;
@@ -142,25 +161,29 @@ proto.emit = function (event) {
 };
 
 /**
- * When an event is emitted on this emitter, emit the same event on another
- * emitter.
+ * When an event is emitted on another emitter, emit the same event here.
  *
- * @method proxy
+ * @method hear
  * @param {String} event
  * @param {Emitter} emitter
  * @chainable
  */
-proto.proxy = function (event, emitter) {
-	if (emitter === this) {
-		throw new Error('Emitter may not proxy to itself.');
-	}
+proto.hear = function (event, emitter) {
+	proxy(event, emitter, this);
 
-	var fn = emitter.emit,
-		on = bind(fn, emitter, event);
+	return this;
+};
 
-	on.fn = fn;
-
-	this.on(event, on);
+/**
+ * When an event is emitted here, emit the same event on another emitter.
+ *
+ * @method tell
+ * @param {String} event
+ * @param {Emitter} emitter
+ * @chainable
+ */
+proto.tell = function (event, emitter) {
+	proxy(event, this, emitter);
 
 	return this;
 };

@@ -10,7 +10,8 @@ describe('Model', function () {
 		var obj = {},
 			a = model(obj),
 			b = new Model(obj),
-			c = model(b);
+			c = model(b),
+			d = model();
 
 		expect(a instanceof Model).to.be(true);
 		expect(b instanceof Model).to.be(true);
@@ -18,6 +19,7 @@ describe('Model', function () {
 		expect(a.obj).to.be(obj); // functional
 		expect(b.obj).to.be(obj); // classical
 		expect(c.obj).to.be(obj); // re-wrap
+		expect(d.obj).to.eql({}); // create
 
 		expect(a).not.to.be(b);
 		expect(b).not.to.be(c);
@@ -36,21 +38,7 @@ describe('Model', function () {
 		});
 
 		describe('set', function () {
-			it('should set a value', function () {
-				var obj = { foo: 'bar' },
-					a = model(obj);
-
-				expect(a.get('foo')).to.be('bar');
-				expect(a.get('hello')).to.be(undefined);
-
-				a.set('foo', 'baz');
-				a.set('hello', 'world');
-
-				expect(a.get('foo')).to.be('baz');
-				expect(a.get('hello')).to.be('world');
-			});
-
-			it('should notify of change', function (done) {
+			it('should set a value', function (done) {
 				var count = 0,
 					obj = { foo: 'bar' },
 					a = model(obj);
@@ -80,9 +68,15 @@ describe('Model', function () {
 					}
 				));
 
+				expect(a.get('foo')).to.be('bar');
+				expect(a.get('hello')).to.be(undefined);
+
 				a.set('foo', 'bar');     // shouldn't fire
 				a.set('foo', 'baz');     // should fire update
 				a.set('hello', 'world'); // should fire add
+
+				expect(a.get('foo')).to.be('baz');
+				expect(a.get('hello')).to.be('world');
 
 				process.nextTick(function () {
 					expect(count).to.be(2);
