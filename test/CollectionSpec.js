@@ -1,7 +1,7 @@
 'use strict';
 
 var Collection = require('../src/collection'),
-	gimmie = require('gimmie'),
+	supply = require('mtil/function/supply'),
 	collection = Collection,
 	expect = require('expect.js');
 
@@ -35,7 +35,7 @@ describe('Collection', function () {
 					arr = [foo],
 					a = collection(arr);
 
-				a.on('change', gimmie(
+				a.on('change', supply(
 					function (changeset) {
 						expect(changeset).to.eql([
 							{

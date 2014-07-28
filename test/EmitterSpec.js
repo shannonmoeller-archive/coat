@@ -1,16 +1,17 @@
 'use strict';
 
 var Emitter = require('../src/emitter'),
-	expect = require('expect.js'),
-	emitter = Emitter;
+	expect = require('expect.js');
 
 describe('Emitter', function () {
+	var emitter = Emitter;
+
 	it('should create an emitter', function () {
 		var a = emitter(),
 			b = new Emitter();
 
-		expect(a instanceof Emitter).to.be(true);
-		expect(b instanceof Emitter).to.be(true);
+		expect(a).to.be.an(Emitter);
+		expect(b).to.be.an(Emitter);
 
 		expect(a).not.to.be(b);
 	});
@@ -20,7 +21,7 @@ describe('Emitter', function () {
 			it('should get listeners', function () {
 				var a = emitter();
 
-				a.callbacks = {
+				a.listeners = {
 					foo: [function () {}]
 				};
 
@@ -112,7 +113,7 @@ describe('Emitter', function () {
 
 				a.off();
 
-				expect(a.callbacks).to.eql({});
+				expect(a.listeners).to.be(undefined);
 			});
 		});
 
@@ -153,59 +154,6 @@ describe('Emitter', function () {
 				a.emit('foo', data);
 
 				expect(count).to.be(1);
-			});
-		});
-
-		describe('proxy', function () {
-			it('should proxy an event', function () {
-				var count = 0,
-					a = emitter(),
-					b = emitter(),
-					foo = function () {
-						count++;
-					},
-					bar = function () {
-						throw new Error('bar executed unexpectedly');
-					};
-
-				b.on('foo', foo);
-				b.on('bar', bar);
-
-				a.proxy('foo', b);
-				a.emit('foo');
-
-				expect(count).to.be(1);
-			});
-
-			it('should proxy an event with data', function () {
-				var count = 0,
-					a = emitter(),
-					b = emitter(),
-					data = { hello: 'world' },
-					foo = function (obj) {
-						expect(obj).to.be(data);
-						count++;
-					},
-					bar = function () {
-						throw new Error('bar executed unexpectedly');
-					};
-
-				b.on('foo', foo);
-				b.on('bar', bar);
-
-				a.proxy('foo', b);
-				a.emit('foo', data);
-
-				expect(count).to.be(1);
-			});
-
-			it('should not proxy to itself', function () {
-				var nope = function () {
-					var a = emitter();
-					a.proxy('foo', a);
-				};
-
-				expect(nope).to.throwError();
 			});
 		});
 	});

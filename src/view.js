@@ -2,7 +2,7 @@
 
 var proto,
 	Emitter = require('./emitter'),
-	inherits = require('mout/lang/inheritPrototype');
+	inherits = require('mtil/function/inherits');
 
 /**
  * A simple observable element mutator.

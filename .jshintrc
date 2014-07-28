@@ -65,11 +65,13 @@
     "yui": false,
 
     "globals": {
+        "after": true,
         "afterEach": true,
+        "before": true,
         "beforeEach": true,
         "describe": true,
-        "expect": true,
         "it": true,
-        "spyOn": true
+        "Map": true,
+        "Set": true
     }
 }

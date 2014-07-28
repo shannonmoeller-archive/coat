@@ -2,7 +2,7 @@
 
 var proto,
 	Emitter = require('./emitter'),
-	inherits = require('mout/lang/inheritPrototype');
+	inherits = require('mtil/function/inherits');
 
 /**
  * A simple inversion-of-control container.
@@ -17,20 +17,13 @@ function Container() {
 		return new Container();
 	}
 
-	/**
-	 * @property registry
-	 * @type {Object.<String,Any>}
-	 */
-	this.registry = {};
-
 	Emitter.call(this);
 }
 
 proto = inherits(Container, Emitter);
 
 /**
- * Returns a module by name. If the module is a function, it's assumed to be
- * a constructor and is instantiated with the given options.
+ * Returns an instance of a module.
  *
  * @method get
  * @param {String} name
@@ -38,24 +31,26 @@ proto = inherits(Container, Emitter);
  * @return {*}
  */
 proto.get = function (name, options) {
-	var Module = this.registry[name];
+	var modules = this.modules;
+	var Module = modules && modules[name];
+
+    if (Module == null) {
+        throw new Error('Module not found: ' + name);
+    }
 
 	if (Module && typeof Module.factory === 'function') {
-		return Module.factory(options);
+		return Module.factory(options, this);
 	}
 
-	if (typeof Module !== 'function') {
-		return Module;
-	}
+    if (typeof Module === 'function') {
+        return new Module(options, this);
+    }
 
-	options = options || {};
-	options.app = options.app || this;
-
-	return new Module(options);
+	return Module;
 };
 
 /**
- * Registers a module by name.
+ * Registers a module.
  *
  * @method set
  * @param {String} name
@@ -63,12 +58,14 @@ proto.get = function (name, options) {
  * @return {*}
  */
 proto.set = function (name, module) {
+	var modules = this.modules || (this.modules = {});
+
 	if (arguments.length === 1) {
 		module = name;
 		name = module.name;
 	}
 
-	this.registry[name] = module;
+	modules[name] = module;
 
 	return this;
 };

@@ -2,7 +2,7 @@
 
 var proto,
 	Emitter = require('./emitter'),
-	inherits = require('mout/lang/inheritPrototype');
+	inherits = require('mtil/function/inherits');
 
 /**
  * A simple observable controller class.
@@ -59,7 +59,7 @@ module.exports = Controller;
 // 'use strict';
 //
 // var EventEmitter = require('../util/EventEmitter');
-// var inherits = require('mout/lang/inheritPrototype');
+// var inherits = require('mtil/function/inherits');
 //
 // /**
 //  * Native array for each method for use with array-like objects.

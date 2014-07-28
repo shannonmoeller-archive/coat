@@ -1,27 +1,8 @@
 'use strict';
 
-var bind = require('mout/function/bind'),
-	slice = Array.prototype.slice,
-	proto,
-
-	/**
-	 * @type {Function}
-	 * @param {String} event
-	 * @param {Emitter} from
-	 * @param {Emitter} to
-	 */
-	proxy = function (event, from, to) {
-		if (from === to) {
-			throw new Error('Emitter may not proxy to itself.');
-		}
-
-		var fn = to.emit,
-			on = bind(fn, to, event);
-
-		on.fn = fn;
-
-		from.on(event, on);
-	};
+var proto,
+	mixin = require('mtil/object/mixin'),
+	slice = Array.prototype.slice;
 
 /**
  * A simple event emitter.
@@ -34,25 +15,21 @@ function Emitter() {
 	if (!(this instanceof Emitter)) {
 		return new Emitter();
 	}
-
-	/**
-	 * @property callbacks
-	 * @type {Object.<Array.<Function>>}
-	 */
-	this.callbacks = {};
 }
 
 proto = Emitter.prototype;
 
 /**
- * Return array of `event` callbacks.
+ * Returns or creates an array of `event` listeners.
  *
  * @method getListeners
  * @param {String} event
  * @return {Array}
  */
 proto.getListeners = function (event) {
-	return this.callbacks[event] || (this.callbacks[event] = []);
+	var listeners = this.listeners || (this.listeners = {});
+
+	return listeners[event] || (listeners[event] = []);
 };
 
 /**
@@ -94,8 +71,8 @@ proto.one = function (event, fn) {
 };
 
 /**
- * Remove a specific callback, all callbacks for a given `event`,
- * or all callbacks entirely.
+ * Remove a specific callback, all listeners for a given `event`,
+ * or all listeners entirely.
  *
  * @method off
  * @param {String} event
@@ -103,33 +80,33 @@ proto.one = function (event, fn) {
  * @chainable
  */
 proto.off = function (event, fn) {
-	var callbacks, length, cb, i;
+	var listeners, length, cb, i;
 
 	switch (arguments.length) {
 		case 0: {
 			// all
-			this.callbacks = {};
+			delete this.listeners;
 
 			return this;
 		}
 
 		case 1: {
 			// specific type
-			delete this.callbacks[event];
+			delete this.listeners[event];
 
 			return this;
 		}
 
 		default: {
 			// specific method
-			callbacks = this.getListeners(event);
-			length = callbacks.length;
+			listeners = this.getListeners(event);
+			length = listeners.length;
 
 			for (i = 0; i < length; i++) {
-				cb = callbacks[i];
+				cb = listeners[i];
 
 				if (cb === fn || cb.fn === fn) {
-					callbacks.splice(i, 1);
+					listeners.splice(i, 1);
 					break;
 				}
 			}
@@ -144,48 +121,33 @@ proto.off = function (event, fn) {
  *
  * @method emit
  * @param {String} event
- * @param {Mixed} ...
+ * @param {Mixed} ...args
  * @chainable
  */
 proto.emit = function (event) {
 	var args = slice.call(arguments, 1),
-		callbacks = this.getListeners(event).slice(0),
-		length = callbacks.length,
+		listeners = this.getListeners(event).slice(0),
+		length = listeners.length,
 		i = 0;
 
 	for (; i < length; i++) {
-		callbacks[i].apply(this, args);
+		listeners[i].apply(this, args);
 	}
 
 	return this;
 };
 
 /**
- * When an event is emitted on another emitter, emit the same event here.
+ * Blesses an object with emitting powers.
  *
- * @method hear
- * @param {String} event
- * @param {Emitter} emitter
- * @chainable
+ * @method mixin
+ * @param {Object} obj
+ * @return {Object}
+ * @static
  */
-proto.hear = function (event, emitter) {
-	proxy(event, emitter, this);
 
-	return this;
-};
-
-/**
- * When an event is emitted here, emit the same event on another emitter.
- *
- * @method tell
- * @param {String} event
- * @param {Emitter} emitter
- * @chainable
- */
-proto.tell = function (event, emitter) {
-	proxy(event, this, emitter);
-
-	return this;
+Emitter.mixin = function(obj) {
+	return mixin(obj, proto);
 };
 
 module.exports = Emitter;

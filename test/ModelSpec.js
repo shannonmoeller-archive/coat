@@ -2,7 +2,7 @@
 
 var Model = require('../src/model'),
 	expect = require('expect.js'),
-	gimmie = require('gimmie'),
+	supply = require('mtil/function/supply'),
 	model = Model;
 
 describe('Model', function () {
@@ -43,7 +43,7 @@ describe('Model', function () {
 					obj = { foo: 'bar' },
 					a = model(obj);
 
-				a.on('change', gimmie(
+				a.on('change', supply(
 					function (changeset) {
 						expect(changeset).to.eql([{
 							object: obj,

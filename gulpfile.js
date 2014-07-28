@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 	paths = {
 		gulp: 'gulpfile.js',
 		src: 'src/**/*.js',
-		test: 'test/*Spec.js'
+		test: 'test/{Emitter,Container}Spec.js' // 'test/*Spec.js'
 	};
 
 gulp.task('default', ['lint', 'test']);
