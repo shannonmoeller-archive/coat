@@ -157,4 +157,17 @@ describe('Emitter', function () {
 			});
 		});
 	});
+
+	describe('mixin', function () {
+		it('should bless a non-emitter with emitting powers', function () {
+			var a = {},
+				b = Emitter.mixin(a);
+
+			expect(a).not.to.be.an(Emitter);
+			expect(a).to.have.property('on');
+			expect(a).to.have.property('off');
+
+			expect(a).to.be(b);
+		});
+	});
 });

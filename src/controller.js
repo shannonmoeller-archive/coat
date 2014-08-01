@@ -11,35 +11,18 @@ var proto,
  * @extends Emitter
  *
  * @constructor
- * @param {Object} options
- * @param {Container} options.app
- * @param {Model} options.model
- * @param {View} options.view
+ * @param {Object} scope
  */
-function Controller(options) {
+function Controller(scope) {
 	if (!(this instanceof Controller)) {
-		return new Controller(options);
+		return new Controller(scope);
 	}
 
-	options = options || {};
-
 	/**
-	 * @property app
-	 * @type {Container}
+	 * @property scope
+	 * @type {Object}
 	 */
-	this.app = options.app;
-
-	/**
-	 * @property model
-	 * @type {Model}
-	 */
-	this.model = options.model;
-
-	/**
-	 * @property model
-	 * @type {View}
-	 */
-	this.view = options.view;
+	this.scope = scope || {};
 
 	Emitter.call(this);
 }
@@ -50,8 +33,59 @@ proto = inherits(Controller, Emitter);
  * @method start
  * @chainable
  */
-proto.start = function () {
-	return this;
+proto.start = function(view) {
+    var el = view || this.view;
+    var views = el.querySelectorAll('[data-controller]:not([data-started])');
+
+    forEach.call(views, this._start, this);
+
+    return this;
+};
+
+/**
+ * @method _start
+ * @param {HTMLElement} view
+ * @callback
+ */
+proto._start = function(view) {
+    var app = this.app;
+    var name = view.dataset.controller;
+    var child = app.get(name, {
+        app: app,
+        view: view
+    });
+
+    view.setAttribute('data-started', true);
+
+    this.getChildren(name).push(child);
+};
+
+/**
+ * @method stop
+ * @chainable
+ */
+proto.stop = function() {
+    var type;
+    var children = this.children;
+
+    for (type in children) {
+        if (children.hasOwnProperty(type)) {
+            children[type].forEach(this._stop, this);
+        }
+    }
+
+    this.children = {};
+
+    return this;
+};
+
+/**
+ * @method _stop
+ * @param {Controller} child
+ * @callback
+ */
+proto._stop = function(child) {
+    child.stop();
 };
 
 module.exports = Controller;

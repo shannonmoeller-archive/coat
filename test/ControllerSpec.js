@@ -6,6 +6,7 @@ var Controller = require('../src/controller'),
 describe('Controller', function () {
 	it('should', function () {
 		var a = new Controller();
+
 		expect(a).not.to.be(undefined);
 	});
 

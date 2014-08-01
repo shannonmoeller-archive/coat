@@ -23,7 +23,7 @@ function Container() {
 proto = inherits(Container, Emitter);
 
 /**
- * Returns an instance of a module.
+ * Returns an instance of a module, by any means neccessary.
  *
  * @method get
  * @param {String} name
@@ -31,20 +31,20 @@ proto = inherits(Container, Emitter);
  * @return {*}
  */
 proto.get = function (name, options) {
-	var modules = this.modules;
+	var modules = this._modules;
 	var Module = modules && modules[name];
 
-    if (Module == null) {
-        throw new Error('Module not found: ' + name);
-    }
+	if (Module == null) {
+		throw new Error('Module not found: ' + name);
+	}
 
 	if (Module && typeof Module.factory === 'function') {
 		return Module.factory(options, this);
 	}
 
-    if (typeof Module === 'function') {
-        return new Module(options, this);
-    }
+	if (typeof Module === 'function') {
+		return new Module(options, this);
+	}
 
 	return Module;
 };
@@ -58,7 +58,7 @@ proto.get = function (name, options) {
  * @return {*}
  */
 proto.set = function (name, module) {
-	var modules = this.modules || (this.modules = {});
+	var modules = this._modules || (this._modules = {});
 
 	if (arguments.length === 1) {
 		module = name;

@@ -6,7 +6,7 @@ var Container = require('../src/container'),
 describe('Container', function () {
 	var container = Container;
 
-	it('should', function () {
+	it('should create a container', function () {
 		var a = container(),
 			b = new Container();
 
@@ -60,6 +60,14 @@ describe('Container', function () {
 
 				// return Bar.factory();
 				expect(a.get('Bar')).to.be(foo);
+			});
+
+			it('should throw if a module is not found', function () {
+				var oops = function () {
+					container().get('Foo');
+				};
+
+				expect(oops).to.throwException();
 			});
 		});
 	});
