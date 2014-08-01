@@ -2,13 +2,8 @@
 
 The stupid observable mutator framework.
 
-[![NPM version](https://badge.fury.io/js/coat.png)](http://badge.fury.io/js/coat)
-[![Build Status](https://travis-ci.org/shannonmoeller/coat.png?branch=master)](https://travis-ci.org/shannonmoeller/coat)
-[![Coverage Status](https://coveralls.io/repos/shannonmoeler/coat/badge.png?branch=master)](https://coveralls.io/r/shannonmoeller/coat?branch=master)
-[![Dependency Status](https://david-dm.org/shannonmoeller/coat.png?theme=shields.io)](https://david-dm.org/shannonmoeller/coat)
-
-Discuss: [![Chat][gitter-img]][gitter-url]
-Support: [![Tip][gittip-img]][gittip-url]
+- Discuss: [![Chat][gitter-img]][gitter-url]
+- Support: [![Tip][gittip-img]][gittip-url]
 
 ## Install
 
@@ -43,7 +38,7 @@ Released under the [MIT License](http://www.opensource.org/licenses/mit-license.
 [downloads-img]: http://img.shields.io/npm/dm/coat.svg?style=flat
 [gitter-img]:    http://img.shields.io/badge/gitter-shannonmoeller/coat-blue.svg?style=flat
 [gitter-url]:    https://gitter.im/shannonmoeller/coat
-[gittip-img]:    http://img.shields.io/shannonmoeller/coat.svg?style=flat
+[gittip-img]:    http://img.shields.io/gittip/shannonmoeller.svg?style=flat
 [gittip-url]:    https://www.gittip.com/shannonmoeller
 [npm-img]:       http://img.shields.io/npm/v/coat.svg?style=flat
 [npm-url]:       https://npmjs.org/package/coat
