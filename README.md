@@ -1,9 +1,8 @@
-# coat [![NPM version][npm-img]][npm-url] [![Downloads][downloads-img]][npm-url] [![Build Status][travis-img]][travis-url] [![Coverage Status][coveralls-img]][coveralls-url]
+# coat [![NPM version][npm-img]][npm-url] [![Downloads][downloads-img]][npm-url] [![Build Status][travis-img]][travis-url] [![Coverage Status][coveralls-img]][coveralls-url] [![Chat][gitter-img]][gitter-url]
 
 The stupid observable mutator framework.
 
-- Discuss: [![Chat][gitter-img]][gitter-url]
-- Support: [![Tip][gittip-img]][gittip-url]
+[![Tip][gittip-img]][gittip-url]
 
 ## Install
 
