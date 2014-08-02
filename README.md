@@ -2,7 +2,7 @@
 
 The stupid observable mutator framework.
 
-[![Chat][gitter-img]][gitter-url] [![Tip][gittip-img]][gittip-url]
+[![Waffle][waffle-img]][waffle-url] [![Chat][gitter-img]][gitter-url]
 
 ## Install
 
@@ -32,6 +32,8 @@ Tested to work in the following environments:
 
 Released under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
 
+[![Tip][gittip-img]][gittip-url]
+
 [coveralls-img]: http://img.shields.io/coveralls/shannonmoeller/coat/master.svg?style=flat
 [coveralls-url]: https://coveralls.io/r/shannonmoeller/coat
 [downloads-img]: http://img.shields.io/npm/dm/coat.svg?style=flat
@@ -43,7 +45,7 @@ Released under the [MIT License](http://www.opensource.org/licenses/mit-license.
 [npm-url]:       https://npmjs.org/package/coat
 [travis-img]:    http://img.shields.io/travis/shannonmoeller/coat.svg?style=flat
 [travis-url]:    https://travis-ci.org/shannonmoeller/coat
-[waffle-img]:    https://badge.waffle.io/shannonmoeller/coat.png?label=ready&title=Ready
+[waffle-img]:    http://img.shields.io/badge/waffle-shannonmoeller/coat-blue.svg?style=flat
 [waffle-url]:    http://waffle.io/shannonmoeller/coat
 
 [lodash]:     http://lodash.com/
