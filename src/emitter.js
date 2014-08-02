@@ -146,7 +146,7 @@ proto.emit = function (event) {
  * @static
  */
 
-Emitter.mixin = function(obj) {
+Emitter.mixin = function (obj) {
 	return mixin(obj, proto);
 };
 

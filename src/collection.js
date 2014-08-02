@@ -87,6 +87,10 @@ proto.slice = function (begin, end) {
  * @chainable
  */
 proto.splice = function (index) {
+	if (index == null) {
+		return this;
+	}
+
 	var len, i,
 		arr = this.arr,
 		old = arr.length,

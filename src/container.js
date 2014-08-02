@@ -31,8 +31,8 @@ proto = inherits(Container, Emitter);
  * @return {*}
  */
 proto.get = function (name, options) {
-	var modules = this._modules;
-	var Module = modules && modules[name];
+	var modules = this._modules,
+		Module = modules && modules[name];
 
 	if (Module == null) {
 		throw new Error('Module not found: ' + name);

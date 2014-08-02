@@ -85,19 +85,7 @@ describe('Collection', function () {
 		});
 
 		describe('empty', function () {
-			it('should remove all items', function () {
-				var foo = { foo: 1 },
-					bar = { bar: 2 },
-					baz = { baz: 3 },
-					arr = [foo, bar, baz],
-					a = collection(arr);
-
-				a.empty();
-
-				expect(a.slice()).to.eql([]);
-			});
-
-			it('should notify of change', function (done) {
+			it('should remove all items', function (done) {
 				var count = 0,
 					foo = { foo: 1 },
 					bar = { bar: 2 },
@@ -106,31 +94,49 @@ describe('Collection', function () {
 					a = collection(arr);
 
 				a.on('change', function (changeset) {
-					console.log(changeset);
+					expect(changeset).to.eql([
+						{
+							object: arr,
+							type: 'delete',
+							name: '0',
+							oldValue: foo
+						},
+						{
+							object: arr,
+							type: 'delete',
+							name: '1',
+							oldValue: bar
+						},
+						{
+							object: arr,
+							type: 'delete',
+							name: '2',
+							oldValue: baz
+						},
+						{
+							object: arr,
+							type: 'update',
+							name: 'length',
+							oldValue: 3
+						}
+					]);
+
+					count++;
 				});
 
+				a.empty();
+
+				expect(a.slice()).to.eql([]);
+
 				process.nextTick(function () {
-					expect(count).to.be(0);
+					expect(count).to.be(1);
 					done();
 				});
 			});
 		});
 
 		describe('remove', function () {
-			it('should remove an item', function () {
-				var foo = { foo: 1 },
-					bar = { bar: 2 },
-					baz = { baz: 3 },
-					arr = [foo, bar, baz],
-					a = collection(arr);
-
-				a.remove(bar);
-				a.remove(bar);
-
-				expect(a.slice()).to.eql([foo, baz]);
-			});
-
-			it('should notify of change', function (done) {
+			it('should remove an item', function (done) {
 				var count = 0,
 					foo = { foo: 1 },
 					bar = { bar: 2 },
@@ -139,11 +145,31 @@ describe('Collection', function () {
 					a = collection(arr);
 
 				a.on('change', function (changeset) {
-					console.log(changeset);
+					expect(changeset).to.eql([
+						{
+							object: arr,
+							type: 'delete',
+							name: '1',
+							oldValue: bar
+						},
+						{
+							object: arr,
+							type: 'update',
+							name: 'length',
+							oldValue: 3
+						}
+					]);
+
+					count++;
 				});
 
+				a.remove(bar);
+				a.remove(null);
+
+				expect(a.slice()).to.eql([foo, baz]);
+
 				process.nextTick(function () {
-					expect(count).to.be(0);
+					expect(count).to.be(1);
 					done();
 				});
 			});
@@ -168,30 +194,39 @@ describe('Collection', function () {
 		});
 
 		describe('splice', function () {
-			it('should manipulate an array', function () {
-				var foo = { foo: 1 },
-					bar = { bar: 2 },
-					baz = { baz: 3 },
-					arr = [foo, bar, baz],
-					a = collection(arr);
-
-				expect(a.slice()).to.eql([foo, bar, baz]);
-			});
-
-			it('should notify of change', function (done) {
+			it('should manipulate an array', function (done) {
 				var count = 0,
 					foo = { foo: 1 },
 					bar = { bar: 2 },
 					baz = { baz: 3 },
+					bat = { bat: 4 },
 					arr = [foo, bar, baz],
 					a = collection(arr);
 
 				a.on('change', function (changeset) {
-					console.log(changeset);
+					expect(changeset).to.eql([
+						{
+							object: arr,
+							type: 'delete',
+							name: '1',
+							oldValue: bar
+						},
+						{
+							object: arr,
+							type: 'add',
+							name: '1'
+						}
+					]);
+
+					count++;
 				});
 
+				a.splice(1, 1, bat);
+				a.splice(0, 0);
+				a.splice(null);
+
 				process.nextTick(function () {
-					expect(count).to.be(0);
+					expect(count).to.be(1);
 					done();
 				});
 			});

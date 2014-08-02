@@ -33,13 +33,13 @@ proto = inherits(Controller, Emitter);
  * @method start
  * @chainable
  */
-proto.start = function(view) {
-    var el = view || this.view;
-    var views = el.querySelectorAll('[data-controller]:not([data-started])');
+proto.start = function (view) {
+	var el = view || this.view,
+		views = el.querySelectorAll('[data-controller]:not([data-started])');
 
-    forEach.call(views, this._start, this);
+	Array.from(views).forEach(this._start, this);
 
-    return this;
+	return this;
 };
 
 /**
@@ -47,36 +47,36 @@ proto.start = function(view) {
  * @param {HTMLElement} view
  * @callback
  */
-proto._start = function(view) {
-    var app = this.app;
-    var name = view.dataset.controller;
-    var child = app.get(name, {
-        app: app,
-        view: view
-    });
+proto._start = function (view) {
+	var app = this.app,
+		name = view.dataset.controller,
+		child = app.get(name, {
+			app: app,
+			view: view
+		});
 
-    view.setAttribute('data-started', true);
+	view.setAttribute('data-started', true);
 
-    this.getChildren(name).push(child);
+	this.getChildren(name).push(child);
 };
 
 /**
  * @method stop
  * @chainable
  */
-proto.stop = function() {
-    var type;
-    var children = this.children;
+proto.stop = function () {
+	var type,
+		children = this.children;
 
-    for (type in children) {
-        if (children.hasOwnProperty(type)) {
-            children[type].forEach(this._stop, this);
-        }
-    }
+	for (type in children) {
+		if (children.hasOwnProperty(type)) {
+			children[type].forEach(this._stop, this);
+		}
+	}
 
-    this.children = {};
+	this.children = {};
 
-    return this;
+	return this;
 };
 
 /**
@@ -84,8 +84,8 @@ proto.stop = function() {
  * @param {Controller} child
  * @callback
  */
-proto._stop = function(child) {
-    child.stop();
+proto._stop = function (child) {
+	child.stop();
 };
 
 module.exports = Controller;
@@ -144,7 +144,7 @@ module.exports = Controller;
 //  * @param {String} type
 //  * @return {Array}
 //  */
-// proto.getChildren = function(type) {
+// proto.getChildren = function (type) {
 //     if (arguments.length === 0) {
 //         return this.children;
 //     }
@@ -159,7 +159,7 @@ module.exports = Controller;
 //  * @param {String} type
 //  * @return {Boolean}
 //  */
-// proto.hasChildren = function(type) {
+// proto.hasChildren = function (type) {
 //     return !!this.getChildren(type).length;
 // };
 //
@@ -170,7 +170,7 @@ module.exports = Controller;
 //  * @param {String} html
 //  * @chainable
 //  */
-// proto.render = function(html) {
+// proto.render = function (html) {
 //     var view = this.view;
 //
 //     // Destroy
@@ -198,7 +198,7 @@ module.exports = Controller;
 //  * @method start
 //  * @chainable
 //  */
-// proto.start = function(view) {
+// proto.start = function (view) {
 //     var el = view || this.view;
 //     var views = el.querySelectorAll('[data-controller]:not([data-started])');
 //
@@ -212,7 +212,7 @@ module.exports = Controller;
 //  * @param {HTMLElement} view
 //  * @callback
 //  */
-// proto._start = function(view) {
+// proto._start = function (view) {
 //     var app = this.app;
 //     var name = view.dataset.controller;
 //     var child = app.get(name, {
@@ -229,7 +229,7 @@ module.exports = Controller;
 //  * @method stop
 //  * @chainable
 //  */
-// proto.stop = function() {
+// proto.stop = function () {
 //     var type;
 //     var children = this.children;
 //
@@ -249,7 +249,7 @@ module.exports = Controller;
 //  * @param {Controller} child
 //  * @callback
 //  */
-// proto._stop = function(child) {
+// proto._stop = function (child) {
 //     child.stop();
 // };
 //

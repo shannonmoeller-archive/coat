@@ -4,7 +4,8 @@ var gulp = require('gulp'),
 	paths = {
 		gulp: 'gulpfile.js',
 		src: 'src/**/*.js',
-		test: 'test/{Emitter,Container}Spec.js' // 'test/*Spec.js'
+		// test: 'test/{Emitter,Container}Spec.js'
+		test: 'test/*Spec.js'
 	};
 
 gulp.task('default', ['lint', 'test']);
@@ -34,7 +35,7 @@ gulp.task('test', ['cover'], function () {
 
 	return gulp
 		.src(paths.test)
-		.pipe(mocha({ reporter: 'spec' }))
+		.pipe(mocha())
 		.pipe(istanbul.writeReports());
 });
 
