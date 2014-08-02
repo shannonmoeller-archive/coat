@@ -45,7 +45,7 @@ Released under the [MIT License](http://www.opensource.org/licenses/mit-license.
 [npm-url]:       https://npmjs.org/package/coat
 [travis-img]:    http://img.shields.io/travis/shannonmoeller/coat.svg?style=flat
 [travis-url]:    https://travis-ci.org/shannonmoeller/coat
-[waffle-img]:    http://img.shields.io/badge/waffle-shannonmoeller/coat-blue.svg?style=flat
+[waffle-img]:    http://img.shields.io/badge/waffle-shannonmoeller/coat-yellow.svg?style=flat
 [waffle-url]:    http://waffle.io/shannonmoeller/coat
 
 [lodash]:     http://lodash.com/
