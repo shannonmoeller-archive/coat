@@ -19,7 +19,7 @@ With [Bower](http://bower.io):
 
 ## Contribute
 
-Standards for this project, including tests, code coverage, and semantics are enforced with a build tool. Pull requests must include passing tests with 100% code coverage and no linting errors. Now drop and give me 20!
+Standards for this project, including tests, code coverage, and semantics are enforced with a build tool. Pull requests must include passing tests with 100% code coverage and no linting errors.
 
 [![Stories in Ready][waffle-img]][waffle-url] [![Chat][gitter-img]][gitter-url]
 
