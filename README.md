@@ -2,8 +2,6 @@
 
 The stupid observable mutator framework.
 
-[![Waffle][waffle-img]][waffle-url] [![Chat][gitter-img]][gitter-url]
-
 ## Install
 
 With [Node.js](http://nodejs.org):
@@ -17,6 +15,13 @@ With [Bower](http://bower.io):
 ## Test
 
     $ npm test
+    
+
+## Contribute
+
+Standards for this project, including tests, code coverage, and semantics are enforced with a build tool. Pull requests must include passing tests with 100% code coverage and no linting errors. Now drop and give me 20!
+
+[![Stories in Ready][waffle-img]][waffle-url] [![Chat][gitter-img]][gitter-url]
 
 ## Compatibility
 
