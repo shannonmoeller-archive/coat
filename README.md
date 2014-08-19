@@ -21,7 +21,7 @@ With [Bower](http://bower.io):
 
 Standards for this project, including tests, code coverage, and semantics are enforced with a build tool. Pull requests must include passing tests with 100% code coverage and no linting errors.
 
-[![Stories in Ready][waffle-img]][waffle-url] [![Chat][gitter-img]][gitter-url]
+[![Tasks][waffle-img]][waffle-url] [![Chat][gitter-img]][gitter-url] [![Tip][gittip-img]][gittip-url]
 
 ## Compatibility
 
@@ -36,8 +36,6 @@ Tested to work in the following environments:
 ## License
 
 Released under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
-
-[![Tip][gittip-img]][gittip-url]
 
 [coveralls-img]: http://img.shields.io/coveralls/shannonmoeller/coat/master.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/shannonmoeller/coat
