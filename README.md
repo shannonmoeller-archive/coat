@@ -39,18 +39,18 @@ Released under the [MIT License](http://www.opensource.org/licenses/mit-license.
 
 [![Tip][gittip-img]][gittip-url]
 
-[coveralls-img]: http://img.shields.io/coveralls/shannonmoeller/coat/master.svg?style=flat
+[coveralls-img]: http://img.shields.io/coveralls/shannonmoeller/coat/master.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/shannonmoeller/coat
-[downloads-img]: http://img.shields.io/npm/dm/coat.svg?style=flat
-[gitter-img]:    http://img.shields.io/badge/gitter-shannonmoeller/coat-blue.svg?style=flat
+[downloads-img]: http://img.shields.io/npm/dm/coat.svg?style=flat-square
+[gitter-img]:    http://img.shields.io/badge/gitter-shannonmoeller/coat-blue.svg?style=flat-square
 [gitter-url]:    https://gitter.im/shannonmoeller/coat
-[gittip-img]:    http://img.shields.io/gittip/shannonmoeller.svg?style=flat
+[gittip-img]:    http://img.shields.io/gittip/shannonmoeller.svg?style=flat-square
 [gittip-url]:    https://www.gittip.com/shannonmoeller
-[npm-img]:       http://img.shields.io/npm/v/coat.svg?style=flat
+[npm-img]:       http://img.shields.io/npm/v/coat.svg?style=flat-square
 [npm-url]:       https://npmjs.org/package/coat
-[travis-img]:    http://img.shields.io/travis/shannonmoeller/coat.svg?style=flat
+[travis-img]:    http://img.shields.io/travis/shannonmoeller/coat.svg?style=flat-square
 [travis-url]:    https://travis-ci.org/shannonmoeller/coat
-[waffle-img]:    http://img.shields.io/badge/waffle-shannonmoeller/coat-yellow.svg?style=flat
+[waffle-img]:    http://img.shields.io/badge/waffle-shannonmoeller/coat-yellow.svg?style=flat-square
 [waffle-url]:    http://waffle.io/shannonmoeller/coat
 
 [lodash]:     http://lodash.com/
