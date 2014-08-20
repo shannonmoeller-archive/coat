@@ -1,19 +1,36 @@
 'use strict';
 
 var View = require('../src/view'),
-	expect = require('expect.js'),
-	view = View;
+	Emitter = require('../src/emitter'),
+	expect = require('expect.js');
 
 describe('View', function () {
+	var view = View;
+
 	it('should wrap an object', function () {
 		var el = {},
 			a = view(el),
 			b = new View(el),
-			c = view(b);
+			c = view(b),
+			d = view();
+
+		expect(a).to.be.a(View);
+		expect(b).to.be.a(View);
+		expect(c).to.be.a(View);
+		expect(d).to.be.a(View);
 
 		expect(a.el).to.be(el); // functional
 		expect(b.el).to.be(el); // classical
 		expect(c.el).to.be(el); // re-wrap
+		expect(d.el).to.be(undefined); // empty
+
+		expect(a).not.to.be(b);
+		expect(b).not.to.be(c);
+		expect(c).not.to.be(d);
+	});
+
+	it('should be an emitter', function () {
+		expect(view()).to.be.an(Emitter);
 	});
 
 	describe('prototype', function () {

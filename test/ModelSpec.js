@@ -1,11 +1,13 @@
 'use strict';
 
 var Model = require('../src/model'),
+	Emitter = require('../src/emitter'),
 	expect = require('expect.js'),
-	supply = require('mtil/function/supply'),
-	model = Model;
+	supply = require('mtil/function/supply');
 
 describe('Model', function () {
+	var model = Model;
+
 	it('should wrap an object', function () {
 		var obj = {},
 			a = model(obj),
@@ -13,8 +15,10 @@ describe('Model', function () {
 			c = model(b),
 			d = model();
 
-		expect(a instanceof Model).to.be(true);
-		expect(b instanceof Model).to.be(true);
+		expect(a).to.be.a(Model);
+		expect(b).to.be.a(Model);
+		expect(c).to.be.a(Model);
+		expect(d).to.be.a(Model);
 
 		expect(a.obj).to.be(obj); // functional
 		expect(b.obj).to.be(obj); // classical
@@ -23,6 +27,11 @@ describe('Model', function () {
 
 		expect(a).not.to.be(b);
 		expect(b).not.to.be(c);
+		expect(c).not.to.be(d);
+	});
+
+	it('should be an emitter', function () {
+		expect(model()).to.be.an(Emitter);
 	});
 
 	describe('prototype', function () {

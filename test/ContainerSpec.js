@@ -1,6 +1,7 @@
 'use strict';
 
 var Container = require('../src/container'),
+	Emitter = require('../src/emitter'),
 	expect = require('expect.js');
 
 describe('Container', function () {
@@ -11,14 +12,13 @@ describe('Container', function () {
 			b = new Container();
 
 		expect(a).to.be.a(Container);
-		expect(a).to.have.property('on');
-		expect(a).to.have.property('off');
-
 		expect(b).to.be.a(Container);
-		expect(b).to.have.property('on');
-		expect(b).to.have.property('off');
 
 		expect(a).not.to.be(b);
+	});
+
+	it('should be an emitter', function () {
+		expect(container()).to.be.an(Emitter);
 	});
 
 	describe('prototype', function () {

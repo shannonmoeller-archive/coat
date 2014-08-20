@@ -1,11 +1,13 @@
 'use strict';
 
 var Collection = require('../src/collection'),
-	supply = require('mtil/function/supply'),
-	collection = Collection,
-	expect = require('expect.js');
+	Emitter = require('../src/emitter'),
+	expect = require('expect.js'),
+	supply = require('mtil/function/supply');
 
 describe('Collection', function () {
+	var collection = Collection;
+
 	it('should wrap an array', function () {
 		var arr = [],
 			a = collection(arr),
@@ -13,8 +15,10 @@ describe('Collection', function () {
 			c = collection(b),
 			d = collection();
 
-		expect(a instanceof Collection).to.be(true);
-		expect(b instanceof Collection).to.be(true);
+		expect(a).to.be.a(Collection);
+		expect(b).to.be.a(Collection);
+		expect(c).to.be.a(Collection);
+		expect(d).to.be.a(Collection);
 
 		expect(a.arr).to.be(arr); // functional
 		expect(b.arr).to.be(arr); // classical
@@ -23,6 +27,11 @@ describe('Collection', function () {
 
 		expect(a).not.to.be(b);
 		expect(b).not.to.be(c);
+		expect(c).not.to.be(d);
+	});
+
+	it('should be an emitter', function () {
+		expect(collection()).to.be.an(Emitter);
 	});
 
 	describe('prototype', function () {
