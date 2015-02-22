@@ -1,3 +1,5 @@
+*DEPRECATION NOTICE*: This project is being reworked into [militiajs/mapp](https://github.com/militiajs/mapp).
+
 # Coat
 
 The stupid observable mutator framework.
