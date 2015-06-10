@@ -33,6 +33,12 @@ function Controller(scope, app) {
 	this.app = app;
 
 	/**
+	 * @property children
+	 * @type {Object}
+	 */
+	this.children = {};
+
+	/**
 	 * @property scope
 	 * @type {Object}
 	 */
@@ -50,8 +56,8 @@ proto = inherits(Controller, Emitter);
  * @param {String} type
  * @return {Array}
  */
-proto.getChildren = function (type) {
-	var children = this.children || (this.children = {});
+proto.getChildrenByType = function (type) {
+	var children = this.children;
 
 	return children[type] || (children[type] = []);
 };
@@ -78,19 +84,19 @@ proto._start = function (view) {
 	var child,
 		app = this.app,
 		scope = Object.create(this.scope),
-		name = view.dataset.controller;
+		type = view.dataset.controller;
 
 	// Expose view
 	scope.view = view;
 
 	// Create child
-	child = app.get(name, scope);
+	child = app.get(type, scope);
 
 	// Flag as started
 	view.setAttribute('data-started', true);
 
 	// Add child
-	this.getChildren(name).push(child);
+	this.getChildrenByType(type).push(child);
 };
 
 /**
